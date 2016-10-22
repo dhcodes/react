@@ -1,0 +1,65 @@
+
+
+class UI extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: undefined};
+    this.handleChange = this.handleChange.bind(this);
+      
+    
+  }
+  
+  handleChange(event) {
+    var markedValue = marked.parse(event.target.value, {sanitize: true})
+    console.log(markedValue)
+    this.setState({value: markedValue});
+    
+  }
+ 
+  
+  render() {
+    return (
+  <div>
+      <div class="container-fluid">
+        <h1 class="center-block">React<br />Markdown<br />Previewer</h1>  
+  <div>
+  <div className = "row">
+    <div className = "large-4 column">
+      <h3>Plain Text</h3>
+      <p>Write your markdown.</p>
+      <div>
+      <textarea className="plain" wrap="physical" name="plain" onChange={this.handleChange}>
+      </textarea>
+      </div>
+  </div>
+    <div className = "large-4 columns">
+      <h3>Markup</h3>
+      <p>See your markup!</p>
+      <div>
+      <textarea disabled wrap="physical" name="marked" value = {this.state.value}>
+      </textarea>
+      </div>
+    </div>
+    <div className = "large-4 columns">
+      <h3>Markdown</h3>
+      <p>See your markdown!</p>
+      <div>
+      <div disabled className="markdown" dangerouslySetInnerHTML = {{__html: this.state.value}}>
+      </div>
+      </div>
+    </div>
+   </div>
+       <footer>
+    Created by <a href="https://github.com/dhcodes">@dhcodes</a>
+  </footer>
+        </div>
+        </div>
+          </div>
+)}
+}
+
+
+ReactDOM.render(
+  <UI />,
+  document.getElementById('ui')
+);
