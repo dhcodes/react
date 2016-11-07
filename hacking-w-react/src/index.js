@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import Detail from './pages/Detail.js';
+import App from './pages/App';
+import Detail from './pages/Detail';
+import List from './pages/List';
 
-ReactDOM.render(
-    <Detail message="This is coming from inside the meow" />,
-    document.getElementById('app')
-);
+
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={ App } >
+      <IndexRoute component={ List } />
+      <Route path="detail/:repo" component={ Detail } />
+    </Route>
+  </Router>
+), document.getElementById('app'))
