@@ -38,7 +38,7 @@ class Detail extends React.Component {
           const author = commit.author ? commit.author.login : 'Anonymous';
 
           return (<p key={index}>
-              <strong>{author}</strong>:
+              <strong><a href={'/:user'}>{author}</a></strong>:
               <a href={commit.html_url}>{commit.commit.message}</a>.
           </p>);
       });
@@ -70,6 +70,7 @@ class Detail extends React.Component {
     console.log(name)
     this.setState({ mode: name })
   }
+
 
 
 
