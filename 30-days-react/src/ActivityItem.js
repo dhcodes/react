@@ -10,6 +10,17 @@ class ActivityItem extends React.Component {
                     src={activity.user.avatar} />
                 {activity.user.name}
             </div>
+
+            <span className = "time">
+                {activity.timestamp}
+            </span>
+            <p>{activity.text}</p>
+            <div className="commentCount">
+                {activity.comments.length}
+            </div>
+        </div>
     )
     }
 }
+
+export default ActivityItem
