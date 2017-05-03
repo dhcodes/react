@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SearchBar from './components/SearchBar'
 import GifList from './components/GifList'
 import request from 'superagent';
+import './styles/app.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -12,13 +13,14 @@ class App extends React.Component {
       gifs: []
     }
   }
-handleTermChange(term) {
-  console.log(term);
-  const url = `http://api.giphy.com/v1/gifs/search?q=${term}&limit=30&api_key=dc6zaTOxFJmzC`;
 
-  request.get(url)
-    .end(function(err, res) {
+handleTermChange = (term) => {
+    const url = `http://api.giphy.com/v1/gifs/search?q=${term.replace(/\s/g, '+')}&api_key=dc6zaTOxFJmzC`;
+    
+    request.get(url)
+    .end((err, res) => {
     console.log(res.body.data[0])
+    this.setState({ gifs: res.body.data })
   })
 }
 
