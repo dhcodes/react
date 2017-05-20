@@ -3,7 +3,7 @@ import request from 'superagent';
 export const REQUEST_GIFS = 'REQUEST_GIFS';
 
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
-const API_KEY = '&api_key=dc6zaT0xFJmzC';
+const API_KEY = '&api_key=dc6zaTOxFJmzC';
 
 
 export function requestGifs(term = null) {
