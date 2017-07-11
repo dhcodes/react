@@ -1,0 +1,279 @@
+class Board extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      gen: 0,
+      running: false,
+      status: 'random',
+      grid: [],
+      height: window.innerHeight,
+      width: window.innerWidth
+    }
+  }
+  
+  componentDidMount() {}
+
+  componentWillUnmount() {}
+  
+  componentWillMount() {}
+      
+  _handleClick(x,y) {
+    let gridCopy = this.state.grid.slice(0);
+    let newAge;
+    console.log(x,y)
+    gridCopy[x][y].props.age == 0 ? newAge = 1 : newAge = 0;
+    console.log(gridCopy[x][y].props.age)
+    gridCopy[x][y] = <Cell x = {x} y = {y} age = {newAge} handleClick = {this._handleClick.bind(this)} />
+    this.setState({
+      grid: gridCopy
+    })
+    
+  }
+  
+  
+  _updateGrid() {
+    //let gridCopy = this.state.grid.slice(0)
+    //let newGrid = [];
+    //console.log(gridCopy.length)
+    
+    /*for (let row = 0; row<gridCopy.length; row++) {
+      for (let col = 0; col<gridCopy[row].length; col++) {
+        */
+    //console.log(this.state.grid)
+    let oldGrid = this.state.grid;
+    let newGrid = [];
+     for (let row = 0; row < 40; row++) {
+        newGrid.push([])
+        for (let col = 0; col < 50; col++) {
+          //grid[i].push(<Cell x={i} y={j} age = {age()} handleClick = {this._handleClick.bind(this)} />)
+        
+         
+        let count = 0;
+        let top = (row - 1 < 0) ? oldGrid.length-1 : row - 1
+        //console.log(top)
+        let bottom = (row + 1 > oldGrid.length -1) ? 0 : row + 1
+        //console.log(bottom)
+        let left = (col - 1 < 0) ? oldGrid[row].length-1 : col - 1
+        //console.log(left)
+        let right = (col + 1 > oldGrid[row].length -1) ? 0 : col + 1
+        //console.log(right)
+        //console.log(oldGrid[row].length)
+       
+        //console.log(oldGrid[bottom][left].props.age)
+       
+        if (oldGrid[top][left].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[top][col].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[top][right].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[row][right].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[bottom][right].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[bottom][col].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[bottom][left].props.age == 1) {
+          count++;
+        }
+        if (oldGrid[row][left].props.age == 1) {
+          count++;
+        }
+          
+      
+        if (count < 2 || count > 3 && oldGrid[row][col].props.age==1) {
+          newGrid[row].push(<Cell x = {row} y = {col} age = {0} handleClick = {this._handleClick.bind(this)} />)
+        }
+        else if (count == 3 || count == 2 && oldGrid[row][col].props.age==1) {
+          newGrid[row].push(<Cell x = {row} y = {col} age = {1} handleClick = {this._handleClick.bind(this)} />)
+        }
+        else if (count == 3 && oldGrid[row][col].props.age==0) {
+          newGrid[row].push(<Cell x = {row} y = {col} age = {1} handleClick = {this._handleClick.bind(this)} />)
+        }
+       else {
+         newGrid[row].push(<Cell x = {row} y = {col} age = {0} handleClick = {this._handleClick.bind(this)} />)
+       }
+  
+   
+        
+        //console.log();
+        //console.log(gridCopy[top][right].props.age);
+        //console.log(gridCopy[row][right].props.age);
+        //console.log(gridCopy[bottom][right].props.age);
+        //console.log(gridCopy[bottom][col].props.age);
+        //console.log(gridCopy[bottom][left].props.age);
+        //console.log(gridCopy[row][left].props.age);
+        
+        
+        
+        
+        //console.log(count)
+  
+                        }
+               
+               
+        
+        
+      }
+    
+    /*
+     console.log(this.state.grid);
+    let updatedGrid = this.state.grid.slice(0)
+ 
+      .map((row) => {
+        return row.map((cell)=> { 
+        return cell.props.age
+        })
+      })
+    for (let i = 0; i<updatedGrid.length; i++) {
+      for (let j = 0; j<updatedGrid[i].length; j++) {
+        let count;
+        function top(i,j) {
+         
+
+          
+        }
+        
+        
+      }
+    }
+     
+     */ 
+    
+    
+    this.setState({
+       running: true,
+       gen: this.state.gen+=1,
+       grid: newGrid
+     }) 
+  }
+  
+    
+  _start() {
+    if (this.state.running == false) {
+    this.intervalId = setInterval(this._updateGrid.bind(this), 100);
+    }
+   }
+     
+  _stop() {
+    
+    clearInterval(this.intervalId)
+    this.setState({
+      running: false
+    })
+  }
+  
+  
+  _reset() {
+  //  this.render
+    this.setState({
+      status: 'random',
+      grid: [],
+      gen: 0
+    })
+    
+  }
+  
+  
+  _clear() {
+    this.setState({
+      status: 'cleared',
+      grid: [],
+      gen: 0
+    })
+    
+    
+  }
+  
+  
+ 
+ 
+    render() {
+      let grid = this.state.grid;
+      let status = this.state.status;
+      var age;
+      if (status == 'cleared') {
+        age = () => 0
+      }
+      if (status == 'random') {
+        age = () => Math.round(Math.random())
+      }
+      if (grid.length == 0) {
+      for (let i = 0; i<40; i++) {
+        grid.push([])
+        for (let j = 0; j<50; j++) {
+          grid[i].push(<Cell x={i} y={j} age = {age()} handleClick = {this._handleClick.bind(this)} />)
+        }
+      }
+        
+      }
+      
+    
+    return (
+      <div>
+      <Controls gen={this.state.gen} start = {this._start.bind(this)} reset = {this._reset.bind(this)} stop = {this._stop.bind(this)} clear = {this._clear.bind(this)} />
+        <div className='board'>
+        {grid}
+        </div>
+      </div>
+    );
+  }
+}
+
+
+
+//Cell
+class Cell extends React.Component {  
+  
+  cellClick() {
+    let x = this.props.x
+    let y = this.props.y
+    this.props.handleClick(x,y)
+  }
+  
+  render() {
+    
+    if (this.props.age === 0) {
+      status = "dead";
+    }
+    else {
+      status = "live";
+    }
+   return (   
+    <div className={`cell ${status}`} onClick = {this.cellClick.bind(this)} >
+    </div>
+    )
+  }
+}
+
+
+
+
+//Controls
+class Controls extends React.Component {
+  render() {
+    return (
+      <div className="controls">
+        <h1>Conway's Game of Life</h1>
+        <h3>Made with love and React</h3>
+          <button id ="start" onClick={this.props.start}>Start</button>
+        <button id = "stop" onClick = {this.props.stop}>Stop</button>
+        <button id="clear" onClick={this.props.clear}>Clear</button>
+          <button id = "reset" onClick = {this.props.reset}>Reset</button>
+          <br/>
+          <br/>
+        <label for="generations">Generations</label>
+          <input name="generations" type="text" id ="gen" value={this.props.gen} disabled></input>
+      </div>
+    )
+  }
+  
+}
+
+ReactDOM.render(<Board className="board" />, document.getElementById('app'))

@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+body {
+  background: url(https://pbs.twimg.com/profile_images/552145045663408129/egywNuyx.png) no-repeat fixed;
+  background-size: 35%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: lightgrey;
+}
+
+h1 {
+  font-family: "Fredoka One", sans-serif;
+  font-size: 40px;
+  color: #5397C2;
+  text-shadow: 3px 3px 1px #444;
+  text-align: center;
+  align-content: center;
+}
+
+table {
+  margin: auto;
+  width: 90%;
+}
+
+.headerRow:hover {
+  background: silver;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+tr {
+  background: rgba(180, 180, 180, 0.8);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+tr:hover {
+  background: #5397C2;
+}
+
+img {
+  width: 5rem;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+footer {
+  color: white;
+  align-self: stretch;
+  background-color: #5397C2;
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer a {
+  color: white;
+}
+
+@media (max-width: 700px) {
+  body {
+    background-size: 70%;
+  }
+
+  .date {
+    display: none;
+  }
+
+  img {
+    width: 3rem;
+  }
+}
