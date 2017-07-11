@@ -35,17 +35,18 @@ class Login extends React.Component {
 
 
     render() {
-        return (
-             <div className="container">
-                <div className="col-md-6 col-md-offset-3">
-                <h2 className="text-center">Log In</h2>
-                <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-                    <Field name="email" component={this.renderField} className="form-control" type="text" label="Email"/>
-                    <Field name="password" component={this.renderField} className="form-control" type="password" label="Password"/>
-                    <button action="submit" className="btn btn-primary">Sign In</button>
-                </form>
-                </div>
-            </div>
+    return(
+      <div className="container">
+        <div className="col-md-6 col-md-offset-3">
+          <h2 className="text-center">Log In</h2>
+          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+            <Field name="email" component={this.renderField} className="form-control" type="text" label="Email"/>
+            <Field name="password" component={this.renderField} className="form-control" type="password" label="Password"/>
+
+            <button action="submit" className="btn btn-primary">Sign In</button>
+          </form>
+        </div>
+      </div>
     );
   }
 }
