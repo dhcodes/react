@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 const App = () => (
-  <div>My App</div>
-);
+  <div>My Todo App</div>
+)
 
 export default App;
