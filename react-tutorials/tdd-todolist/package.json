@@ -23,6 +23,10 @@
     "webdriverio": "^4.8.0"
   },
   "scripts": {
+    "sel-setup": "selenium-standalone install",
+    "sel-start": "selenium-standalone start",
+    "e2e-tests": "wdio wdio.conf.js",
+    "e2e-tests-watch": "wdio wdio.conf.js --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
